@@ -13,10 +13,27 @@ cd ~/arduino-1.8.5
 ./install.sh
 ```
 
-### Set up workspace
+### Get the files
 ```
-cd <your working directory>
+cd git
 git clone git@github.com:hungple/arduino.git
 ```
 
-### Add Makeblock file into Arduino libary
+### Add Makeblock files into Arduino libary
+```
+cd
+cp ~/git/Makeblock-Library-master/makeblock ~/Arduino/libraries/
+```
+
+### Connect your Arduino to your laptop
+1. Connect USB cable
+2. Launch Arduino IDE
+3. Select Tools > Board > Arduino Uno
+4. Select Tools > Port > /dev/ttyUSB0
+5. Run
+```
+sudo chown <username> /dev/ttyUSB0
+```
+6. Select Tools > Serial Monitor
+7. Connect your phone bluetooth to your your car.
+8. Test and ensure that you see data is shown in the Serial Monitor
