@@ -1,28 +1,29 @@
-# arduino
+# Arduino
 Set up Arduino project on Linux Fedora
 
 ### Install Arduino
 1. Go to https://www.arduino.cc/en/Main/Software
 2. Download Arduino IDE for `Linux 64 bits`
-3. Run
+3. Uncompress the file.  After this, you should have a folder `arduino-1.8.5-linux64` in ~/Downloads.
+4. Bring up a terminal and run
 ```
-cd ~/Download
-tar xzvf arduino-1.8.5-linux64.tar.xz
-mv arduino-1.8.5-linux64/arduino-1.8.5 ~/
+cp ~/Downloads/arduino-1.8.5-linux64/arduino-1.8.5 ~/
 cd ~/arduino-1.8.5
 ./install.sh
 ```
+5. Launch Arduino IDE
 
-### Get the files
+### Get the project files
 ```
 cd git
 git clone git@github.com:hungple/arduino.git
 ```
 
 ### Add Makeblock files into Arduino libary
+Run the following command:
 ```
 cd
-cp ~/git/Makeblock-Library-master/makeblock ~/Arduino/libraries/
+cp ~/git/arduino/Makeblock-Library-master/makeblock ~/Arduino/libraries/
 ```
 
 ### Connect your Arduino to your laptop
@@ -35,5 +36,6 @@ cp ~/git/Makeblock-Library-master/makeblock ~/Arduino/libraries/
 sudo chown <username> /dev/ttyUSB0
 ```
 6. Select Tools > Serial Monitor
-7. Connect your phone bluetooth to your your car.
-8. Test and ensure that you see data is shown in the Serial Monitor
+7. Power on your Arduino board
+8. Connect your phone's bluetooth to your bluetooth device.
+9. Test and ensure that you see data is sending in the Serial Monitor
