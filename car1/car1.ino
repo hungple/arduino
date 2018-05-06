@@ -7,21 +7,21 @@
 MeDCMotor MotorF(M1);  
 MeDCMotor MotorB(M2);
 MeInfraredReceiver infraredReceiverDecode(PORT_6);
-int moveSpeed = 190;
-boolean leftflag,rightflag;
-int minSpeed = 55;
-int factor = 23;
+int moveSpeed = 300;
+//boolean leftflag,rightflag;
+//int minSpeed = 55;
+//int factor = 23;
 
 int ledPin = 13;
-int delayTime = 200;
-int preDirection = 0; //0: forward - 1:backward
-//int flag = 0; 
+//int delayTime = 300;
  
 void setup() {
- pinMode(ledPin, OUTPUT);
- digitalWrite(ledPin, LOW);
- 
- Serial.begin(9600); // Default connection rate for my BT module
+  // initialize Serial module
+  Serial.begin(9600); // Default connection rate for my BT module
+
+  // set up the led on pin 13
+  pinMode(ledPin, OUTPUT);
+  digitalWrite(ledPin, LOW);
 }
  
 void loop() {
@@ -29,21 +29,19 @@ void loop() {
     char letter = Serial.read();
     Serial.println(letter);
   
-    if(letter == 'f'){
+    if(letter == 'F'){
       Forward();
-      preDirection = 0;
     }
-    else if(letter == 'b'){
+    else if(letter == 'B'){
       Backward();
-      preDirection = 1;
     }
-    else if(letter == 'r'){
-      TurnRight(preDirection);
+    else if(letter == 'R' || letter == 'I' || letter == 'J'){
+      TurnRight();
     }
-    else if(letter == 'l'){
-      TurnLeft(preDirection);
+    else if(letter == 'L' || letter == 'G' || letter == 'H'){
+      TurnLeft();
     }
-    else if(letter == 's'){
+    else if(letter == 'S'){
       Stop();
     }
   }
@@ -52,45 +50,29 @@ void loop() {
 void Forward()
 {
   MotorB.run(moveSpeed);
-  delay(delayTime);
-  MotorB.run(0);
 }
+
 void Backward()
 {
   MotorB.run(-moveSpeed);
-  delay(delayTime);
-  MotorB.run(0);
 }
-void TurnLeft(int preDirection)
+
+void TurnLeft()
 {
-  MotorF.run(-moveSpeed);
-  if(preDirection == 0){
-    MotorB.run(moveSpeed);
-  }
-  else{
-    MotorB.run(-moveSpeed);
-  }
-  delay(delayTime);
-  MotorF.run(0);
-  MotorB.run(0);
+  MotorF.run(-100);
 }
-void TurnRight(int preDirection)
+
+void TurnRight()
 {
-  MotorF.run(moveSpeed);
-  if(preDirection == 0){
-    MotorB.run(moveSpeed);
-  }
-  else{
-    MotorB.run(-moveSpeed);
-  }
-  delay(delayTime);
-  MotorF.run(0);
-  MotorB.run(0);
+  MotorF.run(100);
 }
+
 void Stop()
 {
   MotorB.run(0);
+  MotorF.run(0);
 }
+
 void ChangeSpeed(int spd)
 {
   moveSpeed = spd;
