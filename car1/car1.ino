@@ -6,8 +6,9 @@
 
 MeDCMotor MotorF(M1);  
 MeDCMotor MotorB(M2);
-MeInfraredReceiver infraredReceiverDecode(PORT_6);
-int moveSpeed = 300;
+//MeInfraredReceiver infraredReceiverDecode(PORT_6);
+int curSpeed = 100;
+
 //boolean leftflag,rightflag;
 //int minSpeed = 55;
 //int factor = 23;
@@ -41,6 +42,51 @@ void loop() {
     else if(letter == 'L' || letter == 'G' || letter == 'H'){
       TurnLeft();
     }
+
+    else if(letter == '1'){
+      ChangeSpeed(1);
+    }
+
+
+    else if(letter == '2'){
+      ChangeSpeed(2);
+    }
+
+    
+    else if(letter == '3'){
+      ChangeSpeed(3);
+    }
+
+    
+    else if(letter == '4'){
+      ChangeSpeed(4);
+    }
+
+    
+    else if(letter == '5'){
+      ChangeSpeed(5);
+    }
+
+    
+    else if(letter == '6'){
+      ChangeSpeed(6);
+    }
+
+    
+    else if(letter == '7'){
+      ChangeSpeed(7);
+    }
+
+    
+    else if(letter == '8'){
+      ChangeSpeed(8);
+    }
+
+    
+    else if(letter == '9'){
+      ChangeSpeed(9);
+    }
+           
     else if(letter == 'S'){
       Stop();
     }
@@ -49,22 +95,22 @@ void loop() {
 
 void Forward()
 {
-  MotorB.run(moveSpeed);
+  MotorB.run(curSpeed);
 }
 
 void Backward()
 {
-  MotorB.run(-moveSpeed);
+  MotorB.run(-curSpeed);
 }
 
 void TurnLeft()
 {
-  MotorF.run(-100);
+  MotorF.run(-1000);
 }
 
 void TurnRight()
 {
-  MotorF.run(100);
+  MotorF.run(1000);
 }
 
 void Stop()
@@ -75,5 +121,5 @@ void Stop()
 
 void ChangeSpeed(int spd)
 {
-  moveSpeed = spd;
+  curSpeed = 100*spd;
 }
