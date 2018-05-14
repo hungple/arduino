@@ -18,18 +18,20 @@ int ledPin = 13;
  
 void setup() {
   // initialize Serial module
+  pinMode(13, OUTPUT);
+  pinMode(12, OUTPUT);
   Serial.begin(9600); // Default connection rate for my BT module
 
   // set up the led on pin 13
-  pinMode(ledPin, OUTPUT);
-  digitalWrite(ledPin, LOW);
+  //pinMode(ledPin, OUTPUT);
+  //digitalWrite(ledPin, LOW);
 }
  
 void loop() {
   if(Serial.available() > 0){
     char letter = Serial.read();
     Serial.println(letter);
-  
+    
     if(letter == 'F'){
       Forward();
     }
@@ -42,17 +44,13 @@ void loop() {
     else if(letter == 'L' || letter == 'G' || letter == 'H'){
       TurnLeft();
     }
-
     else if(letter == '1'){
       ChangeSpeed(1);
     }
-
-
     else if(letter == '2'){
       ChangeSpeed(2);
     }
-
-    
+        
     else if(letter == '3'){
       ChangeSpeed(3);
     }
@@ -89,6 +87,22 @@ void loop() {
            
     else if(letter == 'S'){
       Stop();
+    }
+
+    else if(letter == 'W'){
+      digitalWrite(13, HIGH);   
+    }
+
+    else if(letter == 'w'){
+      digitalWrite(13, LOW);   
+    }
+
+    else if(letter == 'U'){
+      digitalWrite(12, HIGH);   
+    }
+
+    else if(letter == 'u'){
+      digitalWrite(12, LOW);   
     }
   }
 }
