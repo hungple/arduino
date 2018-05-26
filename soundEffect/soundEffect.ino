@@ -53,11 +53,11 @@ void alarm(){
 
 void loop() {
   // put your main code here, to run repeatedly:
-  //gun2();
+  gun2();
   //spaceGun(300);
   //randSound(300);
   //fibonacci(20);
-  alarm();
+  //alarm();
 
   //tone(buzzer,1600);
   //noTone(buzzer);
