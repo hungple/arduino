@@ -1,4 +1,4 @@
-int buzzer = 12;
+int buzzer = 8;
 
 void setup() {
   // put your setup code here, to run once:
