@@ -1,30 +1,3 @@
-#include <Me7SegmentDisplay.h>
-#include <MeDCMotor.h>
-#include <MeEncoderMotor.h>
-#include <MeGyro.h>
-#include <MeHostParser.h>
-#include <MeInfraredReceiver.h>
-#include <MePort.h>
-#include <MeRGBLed.h>
-#include <MeServo.h>
-#include <MeStepper.h>
-#include <MeTemperature.h>
-#include <MeUltrasonic.h>
-#include <MeWire.h>
-
-#include <Me7SegmentDisplay.h>
-#include <MeDCMotor.h>
-#include <MeEncoderMotor.h>
-#include <MeGyro.h>
-#include <MeHostParser.h>
-#include <MeInfraredReceiver.h>
-#include <MePort.h>
-#include <MeRGBLed.h>
-#include <MeServo.h>
-#include <MeStepper.h>
-#include <MeTemperature.h>
-#include <MeUltrasonic.h>
-#include <MeWire.h>
 
 /*************************************************************************
 * File Name          : Makeblock Ultrasonic.ino
@@ -44,11 +17,11 @@
 #include <SoftwareSerial.h>
 #include <Wire.h>
 
-MeDCMotor MotorL(M1);  
+MeDCMotor MotorL(M1);
 MeDCMotor MotorR(M2);
 MeUltrasonicSensor UltrasonicSensor(PORT_3);
-int moveSpeed = 190;
-int turnSpeed = 200;
+int moveSpeed = 500;
+int turnSpeed = 400;
 int distance=0;
 int randnum = 0;
 boolean leftflag,rightflag;
@@ -65,19 +38,19 @@ void loop()
 {
   distance = UltrasonicSensor.distanceCm();
   //Serial.println(distance);
-  
-  if(distance>2&&distance<40)
+
+  if(distance>2&&distance<100)
   {
     randnum=random(300);
     if(randnum > 150 && !rightflag)
     {
       leftflag=true;
-      TurnLeft();   
+      TurnLeft();
     }
     else
     {
       rightflag=true;
-      TurnRight();  
+      TurnRight();
     }
   }
   else
