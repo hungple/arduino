@@ -1,0 +1,673 @@
+<bc_settings>
+  <preferences>
+    <key name="Settings">
+      <int_val name="ShowOnStartup" value="2"/>
+    
+      <bool_val name="AutoSave" value="1"/>
+    
+      <bool_val name="Recycle" value="1"/>
+    
+      <bool_val name="SyncUseSelection" value="0"/>
+    
+      <bool_val name="SyncCreateEmpty" value="1"/>
+    
+      <bool_val name="SyncDisplayFilters" value="1"/>
+    
+      <bool_val name="Hints" value="1"/>
+    
+      <bool_val name="ConfirmFileCopy" value="1"/>
+    
+      <bool_val name="ConfirmFileMove" value="1"/>
+    
+      <bool_val name="ConfirmFolderCreate" value="1"/>
+    
+      <bool_val name="ConfirmReadonly" value="1"/>
+    
+      <bool_val name="ConfirmOverwriteSysFile" value="1"/>
+    
+      <bool_val name="ConfirmMoveOverExisting" value="1"/>
+    
+      <bool_val name="ConfirmCopyOverNewer" value="1"/>
+    
+      <bool_val name="ConfirmContentCompare" value="1"/>
+    
+      <bool_val name="ConfirmFileCompare" value="1"/>
+    
+      <bool_val name="BackupOnCopy" value="0"/>
+    
+      <bool_val name="BackupOnSave" value="0"/>
+    
+      <bool_val name="AudibleNotice" value="0"/>
+    
+      <bool_val name="StripCDReadonly" value="0"/>
+    
+      <bool_val name="UseIndy9" value="0"/>
+    
+      <int_val name="Tip_0" value="-1"/>
+    
+      <bool_val name="AllowMultipleViewers" value="1"/>
+    
+      <bool_val name="AllowMultiInstances" value="1"/>
+    
+      <int_val name="LastCompareType" value="2"/>
+    
+      <int_val name="LastPathType" value="1"/>
+    
+      <int_val name="WalkMode" value="2"/>
+    
+      <bool_val name="WalkBeep" value="0"/>
+    
+      <bool_val name="WalkConfirm" value="1"/>
+    
+      <bool_val name="WalkSection" value="1"/>
+    
+      <bool_val name="WalkSelect" value="0"/>
+    
+      <bool_val name="Walk1Folder" value="1"/>
+    
+      <str_val name="BackupMask" value="*.*;$2$4.~$3"/>
+    
+      <str_val name="BackupPath" value=""/>
+    
+      <int_val name="StreamCacheSize" value="4194304"/>
+    
+      <int_val name="LastSync" value="0"/>
+    
+      <str_val name="Font" value=""/>
+    
+      <int_val name="LogMode" value="1"/>
+    
+      <str_val name="LogFile" value=""/>
+    
+      <int_val name="FileOnlyCompare" value="2"/>
+    
+      <bool_val name="FileOnlySkipOnMismatch" value="0"/>
+    
+      <int_val name="BeepType" value="0"/>
+    
+      <str_val name="ArchiveMasks" value="*.zip;*.gz;*.tgz;*.tar;*.cab;*.jar;*.ear;*.war"/>
+    
+      <bool_val name="ViewersInExplorer" value="1"/>
+    
+      <str_val name="SharedSessions" value=""/>
+    
+      <int_val name="MRUSize" value="9"/>
+    
+      <bool_val name="SccSilentCheckout" value="0"/>
+    
+      <int_val name="ConfigMode" value="4"/>
+    
+      <str_val name="SyncRight" value="0002020100"/>
+    
+      <str_val name="SyncLeft" value="0000101100"/>
+    
+      <int_val name="SyncInteractive" value="0"/>
+    </key>
+  
+    <key name="FolderViewer">
+      <str_val name="Font" value=""/>
+    
+      <int_val name="MatchingColor" value="0"/>
+    
+      <int_val name="OlderThanColor" value="8421376"/>
+    
+      <int_val name="OrphanColor" value="16711680"/>
+    
+      <int_val name="NewerColor" value="255"/>
+    
+      <int_val name="OlderColor" value="8421504"/>
+    
+      <int_val name="FolderStampColor" value="12632256"/>
+    
+      <int_val name="BGColor" value="-16777211"/>
+    
+      <int_val name="SelectedBG" value="13434828"/>
+    
+      <bool_val name="ClassicIcons" value="0"/>
+    
+      <bool_val name="UseStripes" value="1"/>
+    
+      <int_val name="StripeColor" value="15792368"/>
+    
+      <int_val name="LogColor" value="13295817"/>
+    
+      <bool_val name="ColoredFolders" value="1"/>
+    
+      <int_val name="DisplayFilterStyle" value="0"/>
+    
+      <int_val name="DisplayFilters" value="0"/>
+    
+      <bool_val name="ShowEmpties" value="0"/>
+    
+      <bool_val name="SimilarAreExact" value="0"/>
+    
+      <key name="Toolbars">
+        <key name="ActionBar">
+          <str_val name="Rev" value="2000"/>
+        
+          <str_val name="Visible" value="1"/>
+        
+          <str_val name="DockedTo" value="TBDock1"/>
+        
+          <str_val name="LastDock" value="TBDock1"/>
+        
+          <str_val name="DockRow" value="1"/>
+        
+          <str_val name="DockPos" value="138"/>
+        
+          <str_val name="FloatLeft" value="0"/>
+        
+          <str_val name="FloatTop" value="0"/>
+        
+          <str_val name="FloatRightX" value="0"/>
+        </key>
+      
+        <key name="DisplayFilterBar">
+          <str_val name="Rev" value="2000"/>
+        
+          <str_val name="Visible" value="1"/>
+        
+          <str_val name="DockedTo" value="TBDock1"/>
+        
+          <str_val name="LastDock" value="TBDock1"/>
+        
+          <str_val name="DockRow" value="1"/>
+        
+          <str_val name="DockPos" value="0"/>
+        
+          <str_val name="FloatLeft" value="0"/>
+        
+          <str_val name="FloatTop" value="0"/>
+        
+          <str_val name="FloatRightX" value="0"/>
+        </key>
+      
+        <key name="FileFilterBar">
+          <str_val name="Rev" value="2000"/>
+        
+          <str_val name="Visible" value="1"/>
+        
+          <str_val name="DockedTo" value="TBDock1"/>
+        
+          <str_val name="LastDock" value="TBDock1"/>
+        
+          <str_val name="DockRow" value="2"/>
+        
+          <str_val name="DockPos" value="444"/>
+        
+          <str_val name="FloatLeft" value="0"/>
+        
+          <str_val name="FloatTop" value="0"/>
+        
+          <str_val name="FloatRightX" value="0"/>
+        </key>
+      
+        <key name="MainMenuBar">
+          <str_val name="Rev" value="2000"/>
+        
+          <str_val name="Visible" value="1"/>
+        
+          <str_val name="DockedTo" value="TBDock1"/>
+        
+          <str_val name="LastDock" value="TBDock1"/>
+        
+          <str_val name="DockRow" value="0"/>
+        
+          <str_val name="DockPos" value="0"/>
+        
+          <str_val name="FloatLeft" value="0"/>
+        
+          <str_val name="FloatTop" value="0"/>
+        
+          <str_val name="FloatRightX" value="0"/>
+        </key>
+      
+        <key name="PathBar">
+          <str_val name="Rev" value="2000"/>
+        
+          <str_val name="Visible" value="1"/>
+        
+          <str_val name="DockedTo" value="PathDock"/>
+        
+          <str_val name="LastDock" value="PathDock"/>
+        
+          <str_val name="DockRow" value="0"/>
+        
+          <str_val name="DockPos" value="0"/>
+        
+          <str_val name="FloatLeft" value="0"/>
+        
+          <str_val name="FloatTop" value="0"/>
+        
+          <str_val name="FloatRightX" value="0"/>
+        </key>
+      
+        <key name="SessionBar">
+          <str_val name="Rev" value="2000"/>
+        
+          <str_val name="Visible" value="1"/>
+        
+          <str_val name="DockedTo" value="TBDock1"/>
+        
+          <str_val name="LastDock" value="TBDock1"/>
+        
+          <str_val name="DockRow" value="2"/>
+        
+          <str_val name="DockPos" value="0"/>
+        
+          <str_val name="FloatLeft" value="0"/>
+        
+          <str_val name="FloatTop" value="0"/>
+        
+          <str_val name="FloatRightX" value="0"/>
+        </key>
+      
+        <key name="ViewBar">
+          <str_val name="Rev" value="2000"/>
+        
+          <str_val name="Visible" value="1"/>
+        
+          <str_val name="DockedTo" value="TBDock1"/>
+        
+          <str_val name="LastDock" value="TBDock1"/>
+        
+          <str_val name="DockRow" value="1"/>
+        
+          <str_val name="DockPos" value="315"/>
+        
+          <str_val name="FloatLeft" value="0"/>
+        
+          <str_val name="FloatTop" value="0"/>
+        
+          <str_val name="FloatRightX" value="0"/>
+        </key>
+      
+        <key name="WindowsBar">
+          <str_val name="Rev" value="2000"/>
+        
+          <str_val name="Visible" value="0"/>
+        
+          <str_val name="DockedTo" value="TBDock1"/>
+        
+          <str_val name="LastDock" value="TBDock1"/>
+        
+          <str_val name="DockRow" value="2"/>
+        
+          <str_val name="DockPos" value="652"/>
+        
+          <str_val name="FloatLeft" value="0"/>
+        
+          <str_val name="FloatTop" value="0"/>
+        
+          <str_val name="FloatRightX" value="0"/>
+        </key>
+      </key>
+    </key>
+  
+    <key name="FileViewer">
+      <int_val name="ContextLines" value="6"/>
+    
+      <str_val name="Font" value="Courier New;9"/>
+    
+      <str_val name="Text0" value="$000000;$FFFFFF"/>
+    
+      <str_val name="Text1" value="$FF0000;$FFF0F0"/>
+    
+      <str_val name="Text2" value="$0000FF;$F0F0FF"/>
+    
+      <str_val name="Text3" value="$0000FF;$F0F0FF"/>
+    
+      <str_val name="Text4" value="$808000;$A8FFFF;I"/>
+    
+      <int_val name="NotDifferentFG" value="-16777208"/>
+    
+      <int_val name="SelectedBG" value="13434828"/>
+    
+      <bool_val name="UseStripes" value="0"/>
+    
+      <int_val name="StripeColor" value="14680040"/>
+    
+      <int_val name="MissingColor" value="12632256"/>
+    
+      <bool_val name="Crosshatch" value="1"/>
+    
+      <bool_val name="SaveState" value="1"/>
+    
+      <bool_val name="SpaceIndent" value="0"/>
+    
+      <bool_val name="OpenToFirstDiff" value="0"/>
+    
+      <bool_val name="CopyBothOverUnder" value="1"/>
+    
+      <int_val name="ComparePriority" value="2"/>
+    
+      <int_val name="StateFlags" value="263153"/>
+    
+      <str_val name="AsWebPageMasks" value="*.html;*.htm;*.xml;*.php;*.asp;*.jpg;*.gif"/>
+    
+      <bool_val name="IgnoreUnicodeErrors" value="0"/>
+    
+      <bool_val name="ReadonlyOnError" value="0"/>
+    
+      <bool_val name="KeepReadonlyOnSave" value="1"/>
+    
+      <bool_val name="BDSCurrentOnLeft" value="0"/>
+    
+      <key name="Menu">
+        <int_val name="ShowThumbnail" value="33554432"/>
+      </key>
+    
+      <key name="Toolbars">
+        <key name="EditBar">
+          <str_val name="Rev" value="2000"/>
+        
+          <str_val name="Visible" value="1"/>
+        
+          <str_val name="DockedTo" value="TBDock1"/>
+        
+          <str_val name="LastDock" value="TBDock1"/>
+        
+          <str_val name="DockRow" value="1"/>
+        
+          <str_val name="DockPos" value="292"/>
+        
+          <str_val name="FloatLeft" value="0"/>
+        
+          <str_val name="FloatTop" value="0"/>
+        
+          <str_val name="FloatRightX" value="0"/>
+        </key>
+      
+        <key name="FilterBar">
+          <str_val name="Rev" value="2000"/>
+        
+          <str_val name="Visible" value="1"/>
+        
+          <str_val name="DockedTo" value="TBDock1"/>
+        
+          <str_val name="LastDock" value="TBDock1"/>
+        
+          <str_val name="DockRow" value="1"/>
+        
+          <str_val name="DockPos" value="0"/>
+        
+          <str_val name="FloatLeft" value="0"/>
+        
+          <str_val name="FloatTop" value="0"/>
+        
+          <str_val name="FloatRightX" value="0"/>
+        </key>
+      
+        <key name="MainMenuBar">
+          <str_val name="Rev" value="2000"/>
+        
+          <str_val name="Visible" value="1"/>
+        
+          <str_val name="DockedTo" value="TBDock1"/>
+        
+          <str_val name="LastDock" value="TBDock1"/>
+        
+          <str_val name="DockRow" value="0"/>
+        
+          <str_val name="DockPos" value="0"/>
+        
+          <str_val name="FloatLeft" value="0"/>
+        
+          <str_val name="FloatTop" value="0"/>
+        
+          <str_val name="FloatRightX" value="0"/>
+        </key>
+      
+        <key name="SearchBar">
+          <str_val name="Rev" value="2000"/>
+        
+          <str_val name="Visible" value="1"/>
+        
+          <str_val name="DockedTo" value="TBDock1"/>
+        
+          <str_val name="LastDock" value="TBDock1"/>
+        
+          <str_val name="DockRow" value="1"/>
+        
+          <str_val name="DockPos" value="167"/>
+        
+          <str_val name="FloatLeft" value="0"/>
+        
+          <str_val name="FloatTop" value="0"/>
+        
+          <str_val name="FloatRightX" value="0"/>
+        </key>
+      
+        <key name="Toolbar1">
+          <str_val name="Rev" value="2000"/>
+        
+          <str_val name="Visible" value="1"/>
+        
+          <str_val name="DockedTo" value="Header1Dock"/>
+        
+          <str_val name="LastDock" value="Header1Dock"/>
+        
+          <str_val name="DockRow" value="0"/>
+        
+          <str_val name="DockPos" value="0"/>
+        
+          <str_val name="FloatLeft" value="0"/>
+        
+          <str_val name="FloatTop" value="0"/>
+        
+          <str_val name="FloatRightX" value="0"/>
+        </key>
+      
+        <key name="Toolbar2">
+          <str_val name="Rev" value="2000"/>
+        
+          <str_val name="Visible" value="1"/>
+        
+          <str_val name="DockedTo" value="Header2Dock"/>
+        
+          <str_val name="LastDock" value="Header2Dock"/>
+        
+          <str_val name="DockRow" value="0"/>
+        
+          <str_val name="DockPos" value="0"/>
+        
+          <str_val name="FloatLeft" value="0"/>
+        
+          <str_val name="FloatTop" value="0"/>
+        
+          <str_val name="FloatRightX" value="0"/>
+        </key>
+      
+        <key name="ViewBar">
+          <str_val name="Rev" value="2000"/>
+        
+          <str_val name="Visible" value="1"/>
+        
+          <str_val name="DockedTo" value="TBDock1"/>
+        
+          <str_val name="LastDock" value="TBDock1"/>
+        
+          <str_val name="DockRow" value="1"/>
+        
+          <str_val name="DockPos" value="487"/>
+        
+          <str_val name="FloatLeft" value="0"/>
+        
+          <str_val name="FloatTop" value="0"/>
+        
+          <str_val name="FloatRightX" value="0"/>
+        </key>
+      
+        <key name="WindowsBar">
+          <str_val name="Rev" value="2000"/>
+        
+          <str_val name="Visible" value="0"/>
+        
+          <str_val name="DockedTo" value="TBDock1"/>
+        
+          <str_val name="LastDock" value="TBDock1"/>
+        
+          <str_val name="DockRow" value="1"/>
+        
+          <str_val name="DockPos" value="598"/>
+        
+          <str_val name="FloatLeft" value="0"/>
+        
+          <str_val name="FloatTop" value="0"/>
+        
+          <str_val name="FloatRightX" value="0"/>
+        </key>
+      </key>
+    </key>
+  
+    <key name="FTP">
+      <bool_val name="UseFirewall" value="0"/>
+    
+      <str_val name="ProxyHost" value=""/>
+    
+      <str_val name="ProxyUsername" value=""/>
+    
+      <str_val name="ProxyPassword" value=""/>
+    
+      <int_val name="ProxyPort" value="21"/>
+    
+      <int_val name="ProxyType" value="0"/>
+    
+      <bool_val name="PASVMode" value="0"/>
+    
+      <str_val name="EMail" value="BCUser@"/>
+    
+      <int_val name="LinkResolution" value="0"/>
+    
+      <str_val name="ASCIIMasks" value="*.bat;*.ini;*.htm;*.html;*.c;*.h;*.cpp;*.php;*.hpp;*.pas;*.cgi;*.conf;*.diz;*.nfo;*.txt;*.1st;*.java;*.jav;*.py;*.pl;*.css;*.js;*.asp;.htaccess;.htpasswd"/>
+    
+      <int_val name="TransferType" value="2"/>
+    
+      <int_val name="NameMangling" value="0"/>
+    
+      <bool_val name="DetailedTimestamps" value="0"/>
+    
+      <bool_val name="PromptOnInitialFTP" value="1"/>
+    
+      <bool_val name="AutoReconnect" value="0"/>
+    
+      <int_val name="ListOpts" value="0"/>
+    
+      <str_val name="ListOptions" value=""/>
+    
+      <bool_val name="FTPStripVMSVersions" value="0"/>
+    
+      <bool_val name="LastDontSave" value="0"/>
+    
+      <int_val name="Timeout" value="120"/>
+    
+      <str_val name="AfterLogin" value=""/>
+    
+      <bool_val name="UseCompression" value="0"/>
+    
+      <key name="WebEquiv"/>
+    </key>
+  
+    <key name="Snapshot">
+      <bool_val name="CRC" value="1"/>
+    
+      <bool_val name="StoreVersion" value="0"/>
+    
+      <bool_val name="ExpandArchives" value="0"/>
+    
+      <bool_val name="UseFilters" value="1"/>
+    </key>
+  
+    <key name="OpenWith">
+      <str_val name="Notepad" value="notepad.exe"/>
+    
+      <key name="Menu"/>
+    </key>
+  
+    <key name="Filters"/>
+  
+    <key name="Scripting">
+      <bool_val name="BeepWhenDone" value="0"/>
+    
+      <bool_val name="CloseWhenDone" value="0"/>
+    
+      <str_val name="SharedPath" value=""/>
+    </key>
+  
+    <key name="Plugins">
+      <key name="Hex Viewer">
+        <int_val name="ExactFGColor" value="-16777208"/>
+      
+        <int_val name="ExactBGColor" value="-16777211"/>
+      
+        <int_val name="SelFGColor" value="-16777208"/>
+      
+        <int_val name="SelBGColor" value="13434828"/>
+      
+        <int_val name="DiffFGColor" value="255"/>
+      
+        <int_val name="DiffBGColor" value="15921919"/>
+      
+        <int_val name="SelDiffFGColor" value="255"/>
+      
+        <int_val name="SelDiffBGColor" value="13434828"/>
+      
+        <int_val name="HorizLines" value="0"/>
+      
+        <str_val name="ViewerFont" value="Courier New;9"/>
+      
+        <int_val name="BytesPerLine" value="16"/>
+      
+        <int_val name="LineOffsets" value="0"/>
+      
+        <int_val name="AlignMode" value="2"/>
+      
+        <int_val name="ImMemoryLimit" value="2"/>
+      
+        <str_val name="ViewerPos" value="640,299,1280,780,3,2,120"/>
+      
+        <key name="Toolbars">
+          <key name="MainMenuBar">
+            <int_val name="Rev" value="2000"/>
+          
+            <int_val name="Visible" value="1"/>
+          
+            <str_val name="DockedTo" value="TBDockT"/>
+          
+            <str_val name="LastDock" value="TBDockT"/>
+          
+            <int_val name="DockRow" value="0"/>
+          
+            <int_val name="DockPos" value="-4"/>
+          
+            <int_val name="FloatLeft" value="0"/>
+          
+            <int_val name="FloatTop" value="0"/>
+          
+            <int_val name="FloatRightX" value="0"/>
+          </key>
+        
+          <key name="Toolbar">
+            <int_val name="Rev" value="2000"/>
+          
+            <int_val name="Visible" value="1"/>
+          
+            <str_val name="DockedTo" value="TBDockT"/>
+          
+            <str_val name="LastDock" value="TBDockT"/>
+          
+            <int_val name="DockRow" value="1"/>
+          
+            <int_val name="DockPos" value="0"/>
+          
+            <int_val name="FloatLeft" value="0"/>
+          
+            <int_val name="FloatTop" value="0"/>
+          
+            <int_val name="FloatRightX" value="0"/>
+          </key>
+        </key>
+      </key>
+    </key>
+  </preferences>
+</bc_settings>
