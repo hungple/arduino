@@ -1,29 +1,36 @@
-//#include <Makeblock.h>
 #include <Arduino.h>
 #include <SoftwareSerial.h>
 #include <Wire.h>
 
-//MeDCMotor MotorF(M1);
-//MeDCMotor MotorB(M2);
-//MeInfraredReceiver infraredReceiverDecode(PORT_6);
-int curSpeed = 100;
+int curSpeed = 200;
 
-//boolean leftflag,rightflag;
-//int minSpeed = 55;
-//int factor = 23;
+int ENA = 5;
+int IN1 = 3;
+int IN2 = 4;
 
-int ledPin = 13;
-//int delayTime = 300;
+int ENB = 8;
+int IN3 = 6;
+int IN4 = 7;
+
+
+int back_led = 13;
+int front_led = 12;
 
 void setup() {
- // initialize Serial module
- pinMode(13, OUTPUT);
- pinMode(12, OUTPUT);
- Serial.begin(9600); // Default connection rate for my BT module
+  // initialize Serial module
+  Serial.begin(9600); // Default connection rate for my BT module
 
- // set up the led on pin 13
- //pinMode(ledPin, OUTPUT);
- //digitalWrite(ledPin, LOW);
+  // Back motor
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  
+  // Front motor
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
+
+  // back and front leds 
+  pinMode(back_led, OUTPUT);
+  pinMode(front_led, OUTPUT);
 }
 
 void loop() {
@@ -142,11 +149,11 @@ void MotorB_Run(int spd){
   if (spd>0){
     digitalWrite(IN1, HIGH);
     digitalWrite(IN2, LOW);
-    analogWrite(E1, spd);
+    analogWrite(ENA, spd);
   }else{
     digitalWrite(IN1, LOW);
     digitalWrite(IN2, HIGH);
-    analogWrite(E1, -spd);
+    analogWrite(ENA, -spd);
   }
 }
 
@@ -154,35 +161,10 @@ void MotorF_Run(int spd){
   if (spd>0){
     digitalWrite(IN3, HIGH);
     digitalWrite(IN4, LOW);
-    analogWrite(E1, spd);
+    analogWrite(ENB, spd);
   }else{
     digitalWrite(IN3, LOW);
     digitalWrite(IN4, HIGH);
-    analogWrite(E1, -spd);
-  }
-}
-
-
-int E1 = 5;
-int IN1 = 3;
-int IN2 = 4;
-
-void setup()
-{
-  Serial.begin(9600);
-  pinMode(IN1, OUTPUT);
-  pinMode(IN2, OUTPUT);
-}
-
-void loop()
-{
-  int value;
-  for(value = 0 ; value <= 255; value+=5)
-  {
-    digitalWrite(IN1, HIGH);
-    digitalWrite(IN2, LOW);
-    analogWrite(E1, curSpeed);
-    Serial.println(value);
-    delay(30);
+    analogWrite(ENB, -spd);
   }
 }
