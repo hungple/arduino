@@ -1,10 +1,10 @@
 # Arduino
 Set up Arduino project on Linux Fedora
 
-### Install Arduino
+### Install Arduino IDEt
 1. Go to https://www.arduino.cc/en/Main/Software
-2. Download Arduino IDE for `Linux 64 bits`
-3. Uncompress the file.  After this, you should have a folder `arduino-1.8.5-linux64` in ~/Downloads.
+2. Download Arduino IDE for `Linux 64 bits` image.
+3. Open File Manager and goto ~/Downloads folder. Double click to uncompress the newly downloaded file.  After this, you should have a folder `arduino-1.8.5-linux64` in ~/Downloads.
 4. Bring up a terminal and run
 ```
 cp ~/Downloads/arduino-1.8.5-linux64/arduino-1.8.5 ~/
@@ -29,13 +29,21 @@ cp ~/git/arduino/Makeblock-Library-master/makeblock ~/Arduino/libraries/
 ### Connect your Arduino to your laptop
 1. Connect USB cable
 2. Launch Arduino IDE
-3. Select Tools > Board > Arduino Uno
-4. Select Tools > Port > /dev/ttyUSB0
-5. Run
+3. Launch a terminal and run
 ```
-sudo chown <username> /dev/ttyUSB0
+ls /dev/tty*
 ```
-6. Select Tools > Serial Monitor
-7. Power on your Arduino board
-8. Connect your phone's bluetooth to your bluetooth device.
+You may have to wait a few minutes for the device to show up. The new device name may be `ttyUSB0` or `ttyACM0`
+4. Change device's owner
+```
+sudo chown <username> /dev/<Arduino device name> 
+```
+Example:
+```
+sudo chown simon /dev/ttyACM0
+```
+5. Select Tools > Board > Arduino Uno
+6. Select Tools > Port > /dev/<Arduino device name> (/dev/ttyUSB0 or /dev/ttyACM0)
+7. Select Tools > Serial Monitor
+8. Power on your Arduino board
 9. Test and ensure that you see data is sending in the Serial Monitor
