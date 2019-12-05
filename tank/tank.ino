@@ -20,11 +20,11 @@ void setup() {
   // initialize Serial module
   Serial.begin(9600); // Default connection rate for my BT module
 
-  // Back motor
+  // Right motor
   pinMode(IN1, OUTPUT);
   pinMode(IN2, OUTPUT);
   
-  // Front motor
+  // Left motor
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
 
@@ -38,16 +38,16 @@ void loop() {
    char letter = Serial.read();
    Serial.println(letter);
 
-   if(letter == 'F'){
+   if(letter == 'f'){
      Forward();
    }
-   else if(letter == 'B'){
+   else if(letter == 'b'){
      Backward();
    }
-   else if(letter == 'R' || letter == 'I' || letter == 'J'){
+   else if(letter == 'r' || letter == 'i' || letter == 'j'){
      TurnRight();
    }
-   else if(letter == 'L' || letter == 'G' || letter == 'H'){
+   else if(letter == 'l' || letter == 'g' || letter == 'h'){
      TurnLeft();
    }
    else if(letter == '1'){
@@ -91,7 +91,7 @@ void loop() {
      ChangeSpeed(9);
    }
 
-   else if(letter == 'S'){
+   else if(letter == 's'){
      Stop();
    }
 
@@ -115,28 +115,32 @@ void loop() {
 
 void Forward()
 {
- MotorB_Run(curSpeed);
+ MotorR_Run(curSpeed);
+ MotorL_Run(curSpeed);
 }
 
 void Backward()
 {
- MotorB_Run(-curSpeed);
+ MotorR_Run(-curSpeed);
+ MotorL_Run(-curSpeed);
 }
 
 void TurnLeft()
 {
- MotorF_Run(-1000);
+ MotorL_Run(-500);
+ MotorR_Run(500);
 }
 
 void TurnRight()
 {
- MotorF_Run(1000);
+ MotorL_Run(500);
+ MotorR_Run(-500);
 }
 
 void Stop()
 {
- MotorB_Run(0);
- MotorF_Run(0);
+ MotorR_Run(0);
+ MotorL_Run(0);
 }
 
 void ChangeSpeed(int spd)
@@ -145,7 +149,7 @@ void ChangeSpeed(int spd)
 }
 
 
-void MotorB_Run(int spd){
+void MotorR_Run(int spd){
   if (spd>0){
     digitalWrite(IN1, HIGH);
     digitalWrite(IN2, LOW);
@@ -157,7 +161,7 @@ void MotorB_Run(int spd){
   }
 }
 
-void MotorF_Run(int spd){
+void MotorL_Run(int spd){
   if (spd>0){
     digitalWrite(IN3, HIGH);
     digitalWrite(IN4, LOW);
