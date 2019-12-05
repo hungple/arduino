@@ -1,7 +1,7 @@
 # Arduino
 Set up Arduino project on Linux Fedora
 
-### Install Arduino IDEt
+### Install Arduino IDE
 1. Go to https://www.arduino.cc/en/Main/Software
 2. Download Arduino IDE for `Linux 64 bits` image.
 3. Open File Manager and goto ~/Downloads folder. Double click to uncompress the newly downloaded file.  After this, you should have a folder `arduino-1.8.5-linux64` in ~/Downloads.
@@ -11,6 +11,7 @@ cp ~/Downloads/arduino-1.8.5-linux64/arduino-1.8.5 ~/
 cd ~/arduino-1.8.5
 ./install.sh
 ```
+After that there will be an `Arduino IDE` icon added into your application list.
 5. Launch Arduino IDE
 
 ### Get the project files
