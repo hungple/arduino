@@ -12,6 +12,7 @@ cd ~/arduino-1.8.5
 ./install.sh
 ```
 After that there will be an `Arduino IDE` icon added into your application list.
+
 5. Launch Arduino IDE
 
 ### Get the project files
