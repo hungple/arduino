@@ -1,6 +1,14 @@
-#include <Arduino.h>
+// D1 Mini NodeMCU Based WIFI Controlled Car//
+
+#define ENA   16          // L298N ENA Enable/speed Front motors  GPIO16(D0)
+#define IN1   14          // L298N IN1 motors Right               GPIO14(D5)
+#define IN2   12          // L298N IN2 motors Right               GPIO12(D6)
+#define ENB   0           // L298N ENB Enable/speed Back motor    GPIO0(D3)
+#define IN3   4           // L298N IN3 Back motor                 GPIO4(D2)
+#define IN4   5           // L298N IN4 Back motors                GPIO5(D1)
+
+
 #include <SoftwareSerial.h>
-#include <Wire.h>
 
 // Load Wi-Fi library
 #include <ESP8266WiFi.h>
@@ -16,30 +24,18 @@ WiFiServer server(80);
 String header;
 
 // Auxiliar variables to store the current output state
-String output5State = "off";
-String output4State = "off";
 
-// Assign output variables to GPIO pins
-const int output5 = 5;
-const int output4 = 4;
 
 // Current time
 unsigned long currentTime = millis();
 // Previous time
-unsigned long previousTime = 0; 
+unsigned long previousTime = 0;
 // Define timeout time in milliseconds (example: 2000ms = 2s)
 const long timeoutTime = 2000;
 
-
-int curSpeed = 200;
-
-int ENA = 5;
-int IN1 = 3;
-int IN2 = 4;
-
-int ENB = 8;
-int IN3 = 6;
-int IN4 = 7;
+const int MIN_SPEED  = 600;
+const int STEP_SPEED = 50;
+int curSpeed = 600;
 
 
 // int back_led = 13;
@@ -48,11 +44,24 @@ int IN4 = 7;
 void setup() {
   Serial.begin(115200);
   // Initialize the output variables as outputs
-  pinMode(output5, OUTPUT);
-  pinMode(output4, OUTPUT);
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(ENA, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
+  pinMode(ENB, OUTPUT);
+
   // Set outputs to LOW
-  digitalWrite(output5, LOW);
-  digitalWrite(output4, LOW);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  analogWrite (ENA, 0);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN3, LOW);
+  analogWrite (ENB, 0);
+
+  // back and front leds
+  // pinMode(back_led, OUTPUT);
+  // pinMode(front_led, OUTPUT);
 
   // Connect to Wi-Fi network with SSID and password
   Serial.print("Connecting to ");
@@ -68,18 +77,7 @@ void setup() {
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
   server.begin();
-  
-  // Back motor
-//  pinMode(IN1, OUTPUT);
-//  pinMode(IN2, OUTPUT);
-  
-  // Front motor
-//  pinMode(IN3, OUTPUT);
-//  pinMode(IN4, OUTPUT);
 
-  // back and front leds 
-  // pinMode(back_led, OUTPUT);
-  // pinMode(front_led, OUTPUT);
 }
 
 void loop() {
@@ -92,7 +90,7 @@ void loop() {
     currentTime = millis();
     previousTime = currentTime;
     while (client.connected() && currentTime - previousTime <= timeoutTime) { // loop while the client's connected
-      currentTime = millis();         
+      currentTime = millis();
       if (client.available()) {             // if there's bytes to read from the client,
         char c = client.read();             // read a byte, then
         Serial.write(c);                    // print it out the serial monitor
@@ -107,39 +105,46 @@ void loop() {
             client.println("Content-type:text/html");
             client.println("Connection: close");
             client.println();
-            
-            // turns the GPIOs on and off
-            if (header.indexOf("GET /5/on") >= 0) {
-              Serial.println("GPIO 5 on");
-              output5State = "on";
-              digitalWrite(output5, HIGH);
-            } else if (header.indexOf("GET /5/off") >= 0) {
-              Serial.println("GPIO 5 off");
-              output5State = "off";
-              digitalWrite(output5, LOW);
-            } else if (header.indexOf("GET /4/on") >= 0) {
-              Serial.println("GPIO 4 on");
-              output4State = "on";
-              digitalWrite(output4, HIGH);
-            } else if (header.indexOf("GET /4/off") >= 0) {
-              Serial.println("GPIO 4 off");
-              output4State = "off";
-              digitalWrite(output4, LOW);
+
+            // Process header/command
+            if (header.indexOf("GET /F") >= 0) { // Forward
+              Serial.println("F");
+              curSpeed = curSpeed + STEP_SPEED;
+              Serial.println(curSpeed);
+              MotorB_Run(curSpeed);
+            } else if (header.indexOf("GET /S") >= 0) {
+              Serial.println("S");
+              curSpeed = MIN_SPEED;
+              MotorB_Run(0);
+            } else if (header.indexOf("GET /B") >= 0) { // Reverse
+              Serial.println("B");
+              MotorB_Run(-curSpeed);
+            } else if (header.indexOf("GET /L") >= 0) { // Left
+              Serial.println("L");
+              MotorF_Run(1800);
+            } else if (header.indexOf("GET /M") >= 0) {
+              Serial.println("M");
+              MotorF_Run(0);
+            } else if (header.indexOf("GET /R") >= 0) {
+              Serial.println("R");
+              MotorF_Run(-1800);
             }
-            
+
+
             // Display the HTML web page
             client.println("<!DOCTYPE html><html>");
             client.println("<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
             client.println("<link rel=\"icon\" href=\"data:,\">");
-            // CSS to style the on/off buttons 
+            // CSS to style the on/off buttons
             // Feel free to change the background-color and font-size attributes to fit your preferences
             client.println("<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}");
             client.println(".button { background-color: #195B6A; border: none; color: white; padding: 16px 40px;");
             client.println("text-decoration: none; font-size: 12px; margin: 1px; cursor: pointer;}");
             client.println(".button2 {background-color: #77878A;}</style></head>");
-            
+
             // Web Page Heading
-            client.println("<body><h2>ESP8266 Web Server</h2>");
+            client.println("<body>");
+            client.println("<body><h2>ESP8266 Controller</h2>");
 
             // Create a hidden 1x2 table
             client.println("<center><table border=1>");
@@ -147,50 +152,35 @@ void loop() {
 
             // Left controller
             client.println("<td>");
-            
+
             // Create a hidden 3x3 table
             client.println("<center><table border=1>");
-            
-            // Row 1
+
+            // Row Left-table.1
             client.println("<tr>");
             client.println("<td>&nbsp;</td>");
             client.println("<td>");
-            // Display current state, and ON/OFF buttons for GPIO 5  
-            //client.println("<p>GPIO 5 - State " + output5State + "</p>");
-            // If the output5State is off, it displays the ON button       
-            if (output5State=="off") {
-              client.println("<a href=\"/5/on\"><button class=\"button\">ON</button></a>");
-            } else {
-              client.println("<a href=\"/5/off\"><button class=\"button button2\">OFF</button></a>");
-            } 
+            client.println("<a href=\"/F\"><button class=\"button\">F</button></a>");
             client.println("</td>");
             client.println("<td>&nbsp;</td>");
             client.println("</tr>");
-            
-            // Row 2
+
+            // Row Left-table.2
             client.println("<tr>");
-            client.println("<td>");
-            client.println("<a href=\"/4/on\"><button class=\"button\">ON</button></a>");
-            client.println("</td>");
             client.println("<td>&nbsp;");
             client.println("</td>");
             client.println("<td>");
-            client.println("<a href=\"/4/on\"><button class=\"button\">ON</button></a>");
+            client.println("<a href=\"/S\"><button class=\"button\">S</button></a>");
+            client.println("</td>");
+            client.println("<td>&nbsp;");
             client.println("</td>");
             client.println("</tr>");
 
-            // Row 3
+            // Row Left-table.3
             client.println("<tr>");
             client.println("<td>&nbsp;</td>");
             client.println("<td>");
-            // Display current state, and ON/OFF buttons for GPIO 4  
-            //client.println("<p>GPIO 4 - State " + output4State + "</p>");
-            // If the output4State is off, it displays the ON button       
-            if (output4State=="off") {
-              client.println("<a href=\"/4/on\"><button class=\"button\">ON</button></a>");
-            } else {
-              client.println("<a href=\"/4/off\"><button class=\"button button2\">OFF</button></a>");
-            }
+            client.println("<a href=\"/B\"><button class=\"button\">B</button></a>");
             client.println("</td>");
             client.println("<td>&nbsp;</td>");
             client.println("</tr>");
@@ -200,61 +190,47 @@ void loop() {
 
             // Right controller
             client.println("<td>");
-            
+
             // Create a hidden 3x3 table
             client.println("<center><table border=1>");
-            
-            // Row 1
+
+            // Row Right-table.1
             client.println("<tr>");
-            client.println("<td>&nbsp;</td>");
-            client.println("<td>");
-            // Display current state, and ON/OFF buttons for GPIO 5  
-            //client.println("<p>GPIO 5 - State " + output5State + "</p>");
-            // If the output5State is off, it displays the ON button       
-            if (output5State=="off") {
-              client.println("<a href=\"/5/on\"><button class=\"button\">ON</button></a>");
-            } else {
-              client.println("<a href=\"/5/off\"><button class=\"button button2\">OFF</button></a>");
-            } 
-            client.println("</td>");
-            client.println("<td>&nbsp;</td>");
-            client.println("</tr>");
-            
-            // Row 2
-            client.println("<tr>");
-            client.println("<td>");
-            client.println("<a href=\"/4/on\"><button class=\"button\">ON</button></a>");
+            client.println("<td>&nbsp;");
             client.println("</td>");
             client.println("<td>&nbsp;");
             client.println("</td>");
+            client.println("<td>&nbsp;</td>");
+            client.println("</tr>");
+
+            // Row Right-table.2
+            client.println("<tr>");
             client.println("<td>");
-            client.println("<a href=\"/4/on\"><button class=\"button\">ON</button></a>");
+            client.println("<a href=\"/L\"><button class=\"button\">L</button></a>");
+            client.println("</td>");
+            client.println("<td>");
+            client.println("<a href=\"/M\"><button class=\"button\">M</button></a>");
+            client.println("</td>");
+            client.println("<td>");
+            client.println("<a href=\"/R\"><button class=\"button\">R</button></a>");
             client.println("</td>");
             client.println("</tr>");
 
-            // Row 3
+            // Row Right-table.3
             client.println("<tr>");
             client.println("<td>&nbsp;</td>");
-            client.println("<td>");
-            // Display current state, and ON/OFF buttons for GPIO 4  
-            //client.println("<p>GPIO 4 - State " + output4State + "</p>");
-            // If the output4State is off, it displays the ON button       
-            if (output4State=="off") {
-              client.println("<a href=\"/4/on\"><button class=\"button\">ON</button></a>");
-            } else {
-              client.println("<a href=\"/4/off\"><button class=\"button button2\">OFF</button></a>");
-            }
+            client.println("<td>&nbsp;");
             client.println("</td>");
             client.println("<td>&nbsp;</td>");
             client.println("</tr>");
             client.println("</table>");
             client.println("</td>");
-            
+
             client.println("</tr>");
             client.println("</table></center>");
-            
+
             client.println("</body></html>");
-            
+
             // The HTTP response ends with another blank line
             client.println();
             // Break out of the while loop
@@ -275,110 +251,6 @@ void loop() {
     Serial.println("");
   }
 
-  
-// if(Serial.available() > 0){
-//   char letter = Serial.read();
-//   Serial.println(letter);
-//
-//   if(letter == 'F'){
-//     Forward();
-//   }
-//   else if(letter == 'B'){
-//     Backward();
-//   }
-//   else if(letter == 'R' || letter == 'I' || letter == 'J'){
-//     TurnRight();
-//   }
-//   else if(letter == 'L' || letter == 'G' || letter == 'H'){
-//     TurnLeft();
-//   }
-//   else if(letter == '1'){
-//     ChangeSpeed(1);
-//   }
-//   else if(letter == '2'){
-//     ChangeSpeed(2);
-//   }
-//
-//   else if(letter == '3'){
-//     ChangeSpeed(3);
-//   }
-//
-//
-//   else if(letter == '4'){
-//     ChangeSpeed(4);
-//   }
-//
-//
-//   else if(letter == '5'){
-//     ChangeSpeed(5);
-//   }
-//
-//
-//   else if(letter == '6'){
-//     ChangeSpeed(6);
-//   }
-//
-//
-//   else if(letter == '7'){
-//     ChangeSpeed(7);
-//   }
-//
-//
-//   else if(letter == '8'){
-//     ChangeSpeed(8);
-//   }
-//
-//
-//   else if(letter == '9'){
-//     ChangeSpeed(9);
-//   }
-//
-//   else if(letter == 'S'){
-//     Stop();
-//   }
-//
-//   else if(letter == 'W'){
-//     digitalWrite(13, HIGH);
-//   }
-//
-//   else if(letter == 'w'){
-//     digitalWrite(13, LOW);
-//   }
-//
-//   else if(letter == 'U'){
-//     digitalWrite(12, HIGH);
-//   }
-//
-//   else if(letter == 'u'){
-//     digitalWrite(12, LOW);
-//   }
-// }
-}
-
-void Forward()
-{
- MotorB_Run(curSpeed);
-}
-
-void Backward()
-{
- MotorB_Run(-curSpeed);
-}
-
-void TurnLeft()
-{
- MotorF_Run(-1000);
-}
-
-void TurnRight()
-{
- MotorF_Run(1000);
-}
-
-void Stop()
-{
- MotorB_Run(0);
- MotorF_Run(0);
 }
 
 void ChangeSpeed(int spd)
@@ -387,7 +259,7 @@ void ChangeSpeed(int spd)
 }
 
 
-void MotorB_Run(int spd){
+void MotorF_Run(int spd){
   if (spd>0){
     digitalWrite(IN1, HIGH);
     digitalWrite(IN2, LOW);
@@ -399,7 +271,7 @@ void MotorB_Run(int spd){
   }
 }
 
-void MotorF_Run(int spd){
+void MotorB_Run(int spd){
   if (spd>0){
     digitalWrite(IN3, HIGH);
     digitalWrite(IN4, LOW);
