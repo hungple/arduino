@@ -1,18 +1,11 @@
 // D1 Mini NodeMCU Based WIFI Controlled Car//
 
-// #define ENA   16          // L298N ENA Enable/speed Front motors  GPIO16(D0)
-// #define IN1   14          // L298N IN1 motors Right               GPIO14(D5)
-// #define IN2   12          // L298N IN2 motors Right               GPIO12(D6)
-// #define ENB   0           // L298N ENB Enable/speed Back motor    GPIO0(D3)
-// #define IN3   4           // L298N IN3 Back motor                 GPIO4(D2)
-// #define IN4   5           // L298N IN4 Back motors                GPIO5(D1)
-
-#define ENA   4           // L298N ENA Enable/speed Front motors  GPIO4(D2)
-#define IN1   2           // L298N IN1 motors Right               GPIO2(D4)
-#define IN2   0           // L298N IN2 motors Right               GPIO0(D3)
-#define ENB   15          // L298N ENB Enable/speed Back motor    GPIO15(D8)
-#define IN3   13          // L298N IN3 Back motor                 GPIO13(D7)
-#define IN4   12          // L298N IN4 Back motors                GPIO12(D6)
+#define ENB   4           // L298N ENB Enable/speed Front motors  GPIO4(D2)
+#define IN3   2           // L298N IN3 motors Right               GPIO2(D4)
+#define IN4   0           // L298N IN4 motors Right               GPIO0(D3)
+#define ENA   15          // L298N ENA Enable/speed Back motor    GPIO15(D8)
+#define IN1   13          // L298N IN1_1 Back motor               GPIO13(D7)
+#define IN2   12          // L298N IN2_1 Back motors              GPIO12(D6)
 
 #include <SoftwareSerial.h>
 
@@ -51,20 +44,20 @@ int curSpeed = MIN_SPEED;
 void setup() {
   Serial.begin(115200);
   // Initialize the output variables as outputs
-  pinMode(IN1, OUTPUT);
-  pinMode(IN2, OUTPUT);
-  pinMode(ENA, OUTPUT);
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
   pinMode(ENB, OUTPUT);
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(ENA, OUTPUT);
 
   // Set outputs to LOW
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, LOW);
+  analogWrite (ENB, 0);
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, LOW);
   analogWrite (ENA, 0);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN3, LOW);
-  analogWrite (ENB, 0);
 
   // back and front leds
   // pinMode(back_led, OUTPUT);
@@ -275,18 +268,6 @@ void ChangeSpeed(int spd)
 
 void MotorF_Run(int spd){
   if (spd>0){
-    digitalWrite(IN1, HIGH);
-    digitalWrite(IN2, LOW);
-    analogWrite(ENA, spd);
-  }else{
-    digitalWrite(IN1, LOW);
-    digitalWrite(IN2, HIGH);
-    analogWrite(ENA, -spd);
-  }
-}
-
-void MotorB_Run(int spd){
-  if (spd>0){
     digitalWrite(IN3, HIGH);
     digitalWrite(IN4, LOW);
     analogWrite(ENB, spd);
@@ -294,5 +275,17 @@ void MotorB_Run(int spd){
     digitalWrite(IN3, LOW);
     digitalWrite(IN4, HIGH);
     analogWrite(ENB, -spd);
+  }
+}
+
+void MotorB_Run(int spd){
+  if (spd>0){
+    digitalWrite(IN1, HIGH);
+    digitalWrite(IN2, LOW);
+    analogWrite(ENA, spd);
+  }else{
+    digitalWrite(IN1, LOW);
+    digitalWrite(IN2, HIGH);
+    analogWrite(ENA, -spd);
   }
 }
