@@ -56,7 +56,7 @@ void ISRwatchdog() {
 void setup() {
   Serial.begin(115200);
   secondTick.attach(1, ISRwatchdog);
-  
+
   // Initialize the output variables as outputs
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
@@ -99,7 +99,7 @@ void loop() {
   WiFiClient client = server.available();   // Listen for incoming clients
   watchdogCount = 0;
   if (client) {                             // If a new client connects,
-    
+
     Serial.println("New Client.");          // print a message out in the serial port
     String currentLine = "";                // make a String to hold incoming data from the client
     currentTime = millis();
@@ -170,67 +170,11 @@ void loop() {
             // Web Page Heading
             client.println("<body>");
 
-//            client.println("<h2>ESP8266 Controller 2</h2>");
-//            client.println("<button class=\"button\" type=\"button\" onclick=\"loadDoc('F')\">F</button>");
-//            client.println("<button class=\"button\" type=\"button\" onclick=\"loadDoc('S')\">S</button>");
-//            client.println("<button class=\"button\" type=\"button\" onclick=\"loadDoc('B')\">B</button>");
-//            client.println("<br>");
-//            client.println("<br>");
-//            client.println("<br>");
-//            client.println("<br>");
-//            client.println("<button class=\"button\" type=\"button\" onclick=\"loadDoc2('L')\">L</button>");
-//            client.println("<button class=\"button\" type=\"button\" onclick=\"loadDoc('M')\">M</button>");
-//            client.println("<button class=\"button\" type=\"button\" onclick=\"loadDoc2('R')\">R</button>");
-//            client.println("<p id='demo'></p>");
-
-//            client.println("<script>");
-//            client.println("function loadDoc(name) {");
-//            client.println("  var xhttp = new XMLHttpRequest();");
-//            client.println("  xhttp.onreadystatechange = function() {");
-//            client.println("    if (this.readyState == 4 && this.status == 200) {");
-//            client.println("      document.getElementById('demo').innerHTML = this.responseText;");
-//            client.println("    }");
-//            client.println("  };");
-//            client.println("  xhttp.open('GET', name, true);");
-//            client.println("  xhttp.send();");
-//            client.println("  return false;");
-//            client.println("}");
-//
-//            client.println("function loadDoc2(name) {");
-//            client.println("  var xhttp = new XMLHttpRequest();");
-//            client.println("  xhttp.onreadystatechange = function() {");
-//            client.println("    if (this.readyState == 4 && this.status == 200) {");
-//            client.println("      document.getElementById('demo').innerHTML = this.responseText;");
-//            client.println("    }");
-//            client.println("  };");
-//            client.println("  xhttp.open('GET', name, true);");
-//            client.println("  xhttp.send();");
-//            client.println("  sleepFor(200);");
-//            client.println("  var xhttp2 = new XMLHttpRequest();");
-//            client.println("  xhttp2.onreadystatechange = function() {");
-//            client.println("    if (this.readyState == 4 && this.status == 200) {");
-//            client.println("      document.getElementById('demo').innerHTML = this.responseText;");
-//            client.println("    }");
-//            client.println("  };");
-//            client.println("  xhttp2.open('GET', 'M', true);");
-//            client.println("  xhttp2.send();");
-//
-//            client.println("  return false;");
-//            client.println("}");
-//
-//            client.println("function sleepFor( sleepDuration ){");
-//            client.println("  var now = new Date().getTime();");
-//            client.println("  while(new Date().getTime() < now + sleepDuration){ /* do nothing */ } ");
-//            client.println("}");
-//            
-//            client.println("</script>");
-
-
             client.println("<div class='box' id='box1'>");
             client.println("<h3> Touch Me! </h3>");
             client.println("</div>");
             client.println("<h3 id='statusdiv'>Status</h3>");
-            
+
             client.println("<script>");
             client.println("window.addEventListener('load', function(){");
             client.println("var box1 = document.getElementById('box1')");
@@ -240,11 +184,6 @@ void loop() {
             client.println("box1.addEventListener('touchstart', function(e){");
 
             client.println("  var xhttp = new XMLHttpRequest();");
-//            client.println("  xhttp.onreadystatechange = function() {");
-//            client.println("    if (this.readyState == 4 && this.status == 200) {");
-//            client.println("      document.getElementById('demo').innerHTML = this.responseText;");
-//            client.println("    }");
-//            client.println("  };");
             client.println("  xhttp.open('GET', 'L', true);");
             client.println("  xhttp.send();");
             client.println("var touchobj = e.changedTouches[0]");
@@ -254,7 +193,7 @@ void loop() {
             client.println("e.preventDefault()");
             client.println("}, false)");
 
-            
+
             client.println("box1.addEventListener('touchmove', function(e){");
             client.println("var touchobj = e.changedTouches[0]");
             client.println("var dist = parseInt(touchobj.clientX) - startx");
@@ -264,7 +203,7 @@ void loop() {
 //            client.println("  xhttp.open('GET', 'L', true);");
 //            client.println("  xhttp.send();");
 
-            
+
             client.println("}, false)");
             client.println("box1.addEventListener('touchend', function(e){");
             client.println("var touchobj = e.changedTouches[0]");
@@ -283,89 +222,62 @@ void loop() {
             client.println("}, false)");
             client.println("}, false)");
             client.println("</script>");
- 
-            // // Create a hidden 1x2 table
-            // client.println("<center><table border=1>");
-            // client.println("<tr>");
-            //
-            // // Left controller
-            // client.println("<td>");
-            //
-            // // Create a hidden 3x3 table
-            // client.println("<center><table border=1>");
-            //
-            // // Row Left-table.1
-            // client.println("<tr>");
-            // client.println("<td>&nbsp;</td>");
-            // client.println("<td>");
+
+
+//            client.println("<h2>ESP8266 Controller using Javascript</h2>");
+//            client.println("<button class=\"button\" type=\"button\" onclick=\"run('F')\">F</button>");
+//            client.println("<button class=\"button\" type=\"button\" onclick=\"run('S')\">S</button>");
+//            client.println("<button class=\"button\" type=\"button\" onclick=\"run('B')\">B</button>");
+//            client.println("<br>");
+//            client.println("<br>");
+//            client.println("<br>");
+//            client.println("<br>");
+//            client.println("<button class=\"button\" type=\"button\" onclick=\"turn('L')\">L</button>");
+//            client.println("<button class=\"button\" type=\"button\" onclick=\"turn('M')\">M</button>");
+//            client.println("<button class=\"button\" type=\"button\" onclick=\"turn('R')\">R</button>");
+//            client.println("<p id='demo'></p>");
+//
+//            client.println("<script>");
+//            client.println("function run(name) {");
+//            client.println("  var xhttp = new XMLHttpRequest();");
+//            client.println("  xhttp.open('GET', name, true);");
+//            client.println("  xhttp.send();");
+//            client.println("  return false;");
+//            client.println("}");
+//
+//            client.println("function turn(name) {");
+//            client.println("  var xhttp = new XMLHttpRequest();");
+//            client.println("  xhttp.open('GET', name, true);");
+//            client.println("  xhttp.send();");
+//            client.println("  sleepFor(200);");
+//            client.println("  var xhttp2 = new XMLHttpRequest();");
+//            client.println("  xhttp2.open('GET', 'M', true);");
+//            client.println("  xhttp2.send();");
+//            client.println("  return false;");
+//            client.println("}");
+//
+//            client.println("function sleepFor( sleepDuration ){");
+//            client.println("  var now = new Date().getTime();");
+//            client.println("  while(new Date().getTime() < now + sleepDuration){ /* do nothing */ } ");
+//            client.println("}");
+//
+//            client.println("</script>");
+
+
+
+            // client.println("<h2>ESP8266 Controller using HTML</h2>");
+            // client.println("<center>");
             // client.println("<a href=\"/F\"><button class=\"button\">F</button></a>");
-            // client.println("</td>");
-            // client.println("<td>&nbsp;</td>");
-            // client.println("</tr>");
-            //
-            // // Row Left-table.2
-            // client.println("<tr>");
-            // client.println("<td>&nbsp;");
-            // client.println("</td>");
-            // client.println("<td>");
             // client.println("<a href=\"/S\"><button class=\"button\">S</button></a>");
-            // client.println("</td>");
-            // client.println("<td>&nbsp;");
-            // client.println("</td>");
-            // client.println("</tr>");
-            //
-            // // Row Left-table.3
-            // client.println("<tr>");
-            // client.println("<td>&nbsp;</td>");
-            // client.println("<td>");
             // client.println("<a href=\"/B\"><button class=\"button\">B</button></a>");
-            // client.println("</td>");
-            // client.println("<td>&nbsp;</td>");
-            // client.println("</tr>");
-            // client.println("</table>");
-            // client.println("</td>");
-            //
-            //
-            // // Right controller
-            // client.println("<td>");
-            //
-            // // Create a hidden 3x3 table
-            // client.println("<center><table border=1>");
-            //
-            // // Row Right-table.1
-            // client.println("<tr>");
-            // client.println("<td>&nbsp;");
-            // client.println("</td>");
-            // client.println("<td>&nbsp;");
-            // client.println("</td>");
-            // client.println("<td>&nbsp;</td>");
-            // client.println("</tr>");
-            //
-            // // Row Right-table.2
-            // client.println("<tr>");
-            // client.println("<td>");
+            // client.println("<br");
+            // client.println("<br");
+            // client.println("<br");
+            // client.println("<br");
             // client.println("<a href=\"/L\"><button class=\"button\">L</button></a>");
-            // client.println("</td>");
-            // client.println("<td>");
             // client.println("<a href=\"/M\"><button class=\"button\">M</button></a>");
-            // client.println("</td>");
-            // client.println("<td>");
             // client.println("<a href=\"/R\"><button class=\"button\">R</button></a>");
-            // client.println("</td>");
-            // client.println("</tr>");
-            //
-            // // Row Right-table.3
-            // client.println("<tr>");
-            // client.println("<td>&nbsp;</td>");
-            // client.println("<td>&nbsp;");
-            // client.println("</td>");
-            // client.println("<td>&nbsp;</td>");
-            // client.println("</tr>");
-            // client.println("</table>");
-            // client.println("</td>");
-            //
-            // client.println("</tr>");
-            // client.println("</table></center>");
+            // client.println("</center>");
 
             client.println("</body></html>");
 
