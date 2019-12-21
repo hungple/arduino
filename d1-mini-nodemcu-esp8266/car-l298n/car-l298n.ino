@@ -170,58 +170,45 @@ void loop() {
             // Web Page Heading
             client.println("<body>");
 
-            client.println("<div class='box' id='box1'>");
-            client.println("<h3> Touch Me! </h3>");
-            client.println("</div>");
-            client.println("<h3 id='statusdiv'>Status</h3>");
-
-            client.println("<script>");
-            client.println("window.addEventListener('load', function(){");
-            client.println("var box1 = document.getElementById('box1')");
-            client.println("var statusdiv = document.getElementById('statusdiv')");
-            client.println("var startx = 0");
-            client.println("var dist = 0");
-            client.println("box1.addEventListener('touchstart', function(e){");
-
-            client.println("  var xhttp = new XMLHttpRequest();");
-            client.println("  xhttp.open('GET', 'L', true);");
-            client.println("  xhttp.send();");
-            client.println("var touchobj = e.changedTouches[0]");
-            client.println("startx = parseInt(touchobj.clientX)");
-            client.println("statusdiv.innerHTML = 'Status: touchstart<br> ClientX: ' + startx + 'px'");
-
-            client.println("e.preventDefault()");
-            client.println("}, false)");
-
-
-            client.println("box1.addEventListener('touchmove', function(e){");
-            client.println("var touchobj = e.changedTouches[0]");
-            client.println("var dist = parseInt(touchobj.clientX) - startx");
-            client.println("statusdiv.innerHTML = 'Status: touchmove<br> Horizontal distance traveled: ' + dist + 'px'");
-
+//            client.println("<div class='box' id='box1'>");
+//            client.println("<h3> Touch Me! </h3>");
+//            client.println("</div>");
+//            client.println("<h3 id='statusdiv'>Status</h3>");
+//
+//            client.println("<script>");
+//            client.println("window.addEventListener('load', function(){");
+//            client.println("var box1 = document.getElementById('box1')");
+//            client.println("var statusdiv = document.getElementById('statusdiv')");
+//            client.println("var startx = 0");
+//            client.println("var dist = 0");
+//            client.println("box1.addEventListener('touchstart', function(e){");
+//
 //            client.println("  var xhttp = new XMLHttpRequest();");
 //            client.println("  xhttp.open('GET', 'L', true);");
 //            client.println("  xhttp.send();");
-
-
-            client.println("}, false)");
-            client.println("box1.addEventListener('touchend', function(e){");
-            client.println("var touchobj = e.changedTouches[0]");
-            client.println("statusdiv.innerHTML = 'Status: touchend<br> Resting x coordinate: ' + touchobj.clientX + 'px'");
-
-            client.println("  var xhttp = new XMLHttpRequest();");
-//            client.println("  xhttp.onreadystatechange = function() {");
-//            client.println("    if (this.readyState == 4 && this.status == 200) {");
-//            client.println("      document.getElementById('demo').innerHTML = this.responseText;");
-//            client.println("    }");
-//            client.println("  };");
-            client.println("  xhttp.open('GET', 'M', true);");
-            client.println("  xhttp.send();");
-
-            client.println("e.preventDefault()");
-            client.println("}, false)");
-            client.println("}, false)");
-            client.println("</script>");
+//            client.println("var touchobj = e.changedTouches[0]");
+//            client.println("startx = parseInt(touchobj.clientX)");
+//            client.println("statusdiv.innerHTML = 'Status: touchstart<br> ClientX: ' + startx + 'px'");
+//            client.println("e.preventDefault()");
+//            client.println("}, false)");
+//
+//
+//            client.println("box1.addEventListener('touchmove', function(e){");
+//            client.println("var touchobj = e.changedTouches[0]");
+//            client.println("var dist = parseInt(touchobj.clientX) - startx");
+//            client.println("statusdiv.innerHTML = 'Status: touchmove<br> Horizontal distance traveled: ' + dist + 'px'");
+//            client.println("}, false)");
+//
+//            client.println("box1.addEventListener('touchend', function(e){");
+//            client.println("var touchobj = e.changedTouches[0]");
+//            client.println("statusdiv.innerHTML = 'Status: touchend<br> Resting x coordinate: ' + touchobj.clientX + 'px'");
+//            client.println("  var xhttp = new XMLHttpRequest();");
+//            client.println("  xhttp.open('GET', 'M', true);");
+//            client.println("  xhttp.send();");
+//            client.println("e.preventDefault()");
+//            client.println("}, false)");
+//            client.println("}, false)");
+//            client.println("</script>");
 
 
 //            client.println("<h2>ESP8266 Controller using Javascript</h2>");
@@ -235,9 +222,10 @@ void loop() {
 //            client.println("<button class=\"button\" type=\"button\" onclick=\"turn('L')\">L</button>");
 //            client.println("<button class=\"button\" type=\"button\" onclick=\"turn('M')\">M</button>");
 //            client.println("<button class=\"button\" type=\"button\" onclick=\"turn('R')\">R</button>");
-//            client.println("<p id='demo'></p>");
+            client.println("<button class=\"button\" type=\"button\" ontouchstart=\"turn('L')\" ontouchend=\"turn('M')\">L</button>");
+
 //
-//            client.println("<script>");
+            client.println("<script>");
 //            client.println("function run(name) {");
 //            client.println("  var xhttp = new XMLHttpRequest();");
 //            client.println("  xhttp.open('GET', name, true);");
@@ -261,7 +249,15 @@ void loop() {
 //            client.println("  while(new Date().getTime() < now + sleepDuration){ /* do nothing */ } ");
 //            client.println("}");
 //
-//            client.println("</script>");
+
+            client.println("function turn(name) {");
+            client.println("  var xhttp = new XMLHttpRequest();");
+            client.println("  xhttp.open('GET', name, true);");
+            client.println("  xhttp.send();");
+            client.println("  return false;");
+            client.println("}");
+
+            client.println("</script>");
 
 
 
