@@ -27,19 +27,14 @@ String header;
 Ticker secondTick;
 volatile int watchdogCount = 0;
 
-// Current time
-//unsigned long currentTime = millis();
-// Previous time
-//unsigned long previousTime = 0;
-// Define timeout time in milliseconds (example: 2000ms = 2s)
-//const long timeoutTime = 2000;
 
 const int MIN_SPEED  = 400;
-const int MAX_SPEED  = 1500;
-const int STEP_SPEED = 100;
+const int MAX_SPEED  = 1100;
+const int STEP_SPEED = 50;
 const int TURN_SPEED = 1000;
 const int BACK_SPEED = 600;
-const int WATCHDOG_COUNT_MAX = 5;
+const int STOP_MULTIPLY = 3;
+const int WATCHDOG_COUNT_MAX = 4;
 
 int curSpeed = MIN_SPEED;
 
@@ -56,6 +51,7 @@ void ISRwatchdog() {
 
 void setup() {
   Serial.begin(115200);
+  // Register the watchdog
   secondTick.attach(1, ISRwatchdog); // 1st argument in seconds after which the ISRwathdog() executes
 
   // Initialize the output variables as outputs
@@ -74,9 +70,6 @@ void setup() {
   digitalWrite(IN2, LOW);
   analogWrite (ENA, 0);
 
-  // back and front leds
-  // pinMode(back_led, OUTPUT);
-  // pinMode(front_led, OUTPUT);
 
   // Connect to Wi-Fi network with SSID and password
   Serial.print("Connecting to ");
@@ -96,19 +89,15 @@ void setup() {
 }
 
 void loop() {
-  WiFiClient client = server.available();   // Listen for incoming clients
   watchdogCount = 0;
+  WiFiClient client = server.available();   // Listen for incoming clients
   
   
   if (client) {                             // If a new client connects,
 
     Serial.println("New Client.");          // print a message out in the serial port
     String currentLine = "";                // make a String to hold incoming data from the client
-    //currentTime = millis();
-    //previousTime = currentTime;
-    //while (client.connected() && currentTime - previousTime <= timeoutTime) { // loop while the client's connected
-    while (client.connected()) { // loop while the client's connected
-//      currentTime = millis();
+    while (client.connected()) {            // loop while the client's connected
       if (client.available()) {             // if there's bytes to read from the client,
         char c = client.read();             // read a byte, then
         Serial.write(c);                    // print it out the serial monitor
@@ -117,12 +106,6 @@ void loop() {
           // if the current line is blank, you got two newline characters in a row.
           // that's the end of the client HTTP request, so send a response:
           if (currentLine.length() == 0) {
-            // HTTP headers always start with a response code (e.g. HTTP/1.1 200 OK)
-            // and a content-type so the client knows what's coming, then a blank line:
-            client.println("HTTP/1.1 200 OK");
-            client.println("Content-type:text/html");
-            client.println("Connection: close");
-            client.println();
 
             // Process header/command
             if (header.indexOf("GET /F") >= 0) { // Forward
@@ -135,7 +118,7 @@ void loop() {
             } else if (header.indexOf("GET /S") >= 0) {
               Serial.println("S");
               if (curSpeed > MIN_SPEED) {
-                curSpeed = curSpeed - 2*STEP_SPEED;
+                curSpeed = curSpeed - STOP_MULTIPLY*STEP_SPEED;
                 Serial.println(curSpeed);
                 MotorB_Run(curSpeed);
               } else {
@@ -155,6 +138,12 @@ void loop() {
               MotorF_Run(-TURN_SPEED);
             } else {
 
+              // HTTP headers always start with a response code (e.g. HTTP/1.1 200 OK)
+              // and a content-type so the client knows what's coming, then a blank line:
+              client.println("HTTP/1.1 200 OK");
+              client.println("Content-type:text/html");
+              client.println("Connection: close");
+              client.println();
 
               // Display the HTML web page
               client.println("<!DOCTYPE html><html>");
